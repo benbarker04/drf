@@ -38,7 +38,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['8000-benbarker04-drf-6fkfctraqaw.ws-eu114.gitpod.io']
 
-
+CSRF_TRUSTED_ORIGINS = ['https://8000-benbarker04-drf-6fkfctraqaw.ws-eu114.gitpod.io']
 # Application definition
 
 INSTALLED_APPS = [
