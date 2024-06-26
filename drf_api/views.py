@@ -6,6 +6,12 @@ from .settings import (
 )
 
 @api_view()
+def root_route(request):
+    return Response({
+        "message": "welcome to my drf API"
+    })
+
+@api_view()
 def logout_route(request):
     response = Response()
     response.set_cookie(
@@ -27,7 +33,4 @@ def logout_route(request):
         secure=JWT_AUTH_SECURE,    
     )
     return response
-def root_route(request):
-    return Response({
-        "message": "welcome to my drf API"
-    })
+
