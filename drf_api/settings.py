@@ -66,15 +66,17 @@ ALLOWED_HOSTS = [
    'localhost',
 ]
 
-if 'CLIENT_ORIGIN_DEV' in os.environ:
-    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGIN = [
+       os.environ.get('CLIENT_ORIGIN')
     ]
-else:
-     CORS_ALLOWED_ORIGIN_REGEXES = [
-        "https://3000-benbarker04-moments-tvw57axuiui.ws.codeinstitute-ide.net",
-     ]
+
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        os.get.environ('CLIENT_ORGING_DEV', '')
+    ]
+
+CORS_ALLOWED_CREDENTIALS =  True
 
 
 # Application definition
