@@ -113,7 +113,7 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
     ]
 else:
      CORS_ALLOWED_ORIGIN_REGEXES = [
-         r"^https://.*\https://3000-benbarker04-moments-tvw57axuiui.ws.codeinstitute-ide.net",
+        "https://3000-benbarker04-moments-tvw57axuiui.ws.codeinstitute-ide.net",
      ]
 
 CORS_ALLOW_CREDENTIALS = True
