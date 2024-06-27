@@ -11,7 +11,7 @@ def root_route(request):
         "message": "welcome to my drf API"
     })
 
-@api_view()
+@api_view(['POST'])
 def logout_route(request):
     response = Response()
     response.set_cookie(
