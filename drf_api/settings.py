@@ -35,7 +35,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10, 
-    'DATETIME_FORMAT': '%d %b %y',
+    'DATETIME_FORMAT': '%d %b %Y',
 }
 if 'DEV' not in os.environ:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
@@ -56,7 +56,7 @@ REST_AUTH_SERIALIZERS = {
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
@@ -65,6 +65,16 @@ ALLOWED_HOSTS = [
    os.environ.get('ALLOWED_HOST'),
    'localhost',
 ]
+
+if 'CLIENT_ORIGIN_DEV' in os.environ:
+    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
+    ]
+else:
+     CORS_ALLOWED_ORIGIN_REGEXES = [
+        "https://3000-benbarker04-moments-tvw57axuiui.ws.codeinstitute-ide.net",
+     ]
 
 
 # Application definition
@@ -106,15 +116,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-if 'CLIENT_ORIGIN_DEV' in os.environ:
-    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
-    ]
-else:
-     CORS_ALLOWED_ORIGIN_REGEXES = [
-        "https://3000-benbarker04-moments-tvw57axuiui.ws.codeinstitute-ide.net",
-     ]
 
 CORS_ALLOW_CREDENTIALS = True
 
